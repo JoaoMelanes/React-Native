@@ -15,7 +15,6 @@ export default function Settings(){
             <Pressable onPress={goToHome}>
                 <Text>Ir para home➡</Text>
             </Pressable>
-
         </View>
     )
 }
