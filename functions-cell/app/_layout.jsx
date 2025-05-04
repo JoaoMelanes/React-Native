@@ -3,6 +3,7 @@ import { FlatList, Image, Pressable, StyleSheet, Text, TextInput, View } from "r
 import Logo from '../assets/img/cheked.png'
 import Task from "../components/Task"
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
+import { SafeAreaView } from 'react-native-safe-area-context'
 
 export default function RootLayout() {
 
@@ -27,7 +28,7 @@ export default function RootLayout() {
 
   return(
     <GestureHandlerRootView>
-      <View style={style.viewScroll}>
+      <SafeAreaView style={style.viewScroll}>
         <View style={style.textContainer}>
           <Image source={Logo} style={style.image}/>
           <Text style={style.title}>Minhas Tarefas</Text>
@@ -36,6 +37,7 @@ export default function RootLayout() {
         <TextInput style={style.input}
           value={text}
           onChangeText={setText}
+          keyboardType="numeric"
         />
           <Pressable onPress={addTask} 
           style={({pressed}) => [style.btn,{backgroundColor: pressed ? '#0ca46c' : '#32ba7c'}]}>
@@ -55,7 +57,7 @@ export default function RootLayout() {
         />} 
 
         />
-      </View>
+      </SafeAreaView>
     </GestureHandlerRootView>
   )
 }
