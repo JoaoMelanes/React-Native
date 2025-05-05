@@ -1,18 +1,43 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { FlatList, Image, Pressable, StyleSheet, Text, TextInput, View } from "react-native"
 import Logo from '../assets/img/cheked.png'
 import Task from "../components/Task"
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 export default function RootLayout() {
 
-  const initialList = [
-    {id:1, completed: true, text: "Fazer café"},
-    {id:2, completed: false, text: "Estudar programação"},
-    {id:3, completed: true, text: "Comprar ração da gata"}
-  ]
+  // const initialList = [
+  //   {id:1, completed: true, text: "Fazer café"},
+  //   {id:2, completed: false, text: "Estudar programação"},
+  //   {id:3, completed: true, text: "Comprar ração da gata"}
+  // ]
 
-  const [list, setList] = useState(initialList)
+  const [list, setList] = useState([])
   const [text, setText] = useState('')
+  useEffect(() => {
+    getListAsyncStorage = async () => {
+      try{
+        const jsonvalue = await AsyncStorage.getItem('list')
+        return jsonvalue != null ? setList(JSON.parse(jsonvalue)) : null
+      }catch(e){
+        console.log(e)
+      }
+    }
+    getListAsyncStorage()
+  }, [])
+
+  useEffect(() => {
+    setListAsyncStorage = async () => {
+    try{
+      const jsonvalue = JSON.stringify(list)
+      await AsyncStorage.setItem('list', jsonvalue)
+    }catch(e){
+      console.log(e)
+    }
+  }
+  setListAsyncStorage()
+
+  }, [list])
 
   const addTask = () => {
     if(!text){
