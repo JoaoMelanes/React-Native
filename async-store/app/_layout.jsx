@@ -14,6 +14,7 @@ export default function RootLayout() {
 
   const [list, setList] = useState([])
   const [text, setText] = useState('')
+
   useEffect(() => {
     getListAsyncStorage = async () => {
       try{
@@ -25,7 +26,7 @@ export default function RootLayout() {
     }
     getListAsyncStorage()
   }, [])
-
+  
   useEffect(() => {
     setListAsyncStorage = async () => {
     try{
